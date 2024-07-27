@@ -1,10 +1,17 @@
 package ru.job4j.tracker;
 
+import ru.job4j.action.SqlTracker;
+import ru.job4j.action.Store;
+import ru.job4j.action.UserAction;
+
 import java.util.ArrayList;
 
 import java.util.List;
 
-public class Tracker {
+/**
+ * 2. Трекер SQL [#1734].
+ */
+public class MemTracker implements Store {
     private final List<Item> items = new ArrayList<>();
 
     private int ids = 1;
@@ -59,7 +66,12 @@ public class Tracker {
         int i = indexOf(id);
         boolean rsl = i != -1;
         if (rsl) {
-           items.remove(i);
+            items.remove(i);
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+
     }
 }

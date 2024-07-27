@@ -2,12 +2,18 @@ package ru.job4j.tracker;
 
 import java.time.LocalDateTime;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * 2. Трекер SQL [#1734].
+ */
 public class Item {
-    private LocalDateTime created = LocalDateTime.now();
+    private static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private int id;
     private String name;
+    private LocalDateTime created = LocalDateTime.now().withNano(0);
 
     public Item() {
     }
@@ -16,21 +22,18 @@ public class Item {
         this.name = name;
     }
 
-    public Item(String name, int id) {
-        this.name = name;
+    public Item(LocalDateTime created, int id, String name) {
+        this.created = created;
         this.id = id;
+        this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
@@ -41,12 +44,17 @@ public class Item {
         return created;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
-        return "Item{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + '}';
+        return String.format("id: %s, name: %s, created: %s", id, name, FORMATTER.format(created));
     }
 
     @Override
