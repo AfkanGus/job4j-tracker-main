@@ -1,7 +1,9 @@
 package ru.job4j.tracker;
 
 import java.util.List;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 public class StubInput implements Input {
     private List<String> answers;
     private int position = 0;

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 public class ValidateInput implements Input {
 
     private final Output out;

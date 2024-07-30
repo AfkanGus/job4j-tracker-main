@@ -7,7 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 class ItemTest {
     @Test
     void whenSortDown() {

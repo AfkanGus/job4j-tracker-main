@@ -5,7 +5,9 @@ import ru.job4j.action.*;
 import java.util.Arrays;
 
 import java.util.List;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 public class StartUI {
     private final Output out;
 
@@ -13,7 +15,7 @@ public class StartUI {
         this.out = out;
     }
 
-    public void init(Input input, MemTracker tracker, List<UserAction> actions) {
+    public void init(Input input, Store tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             showMenu(actions);

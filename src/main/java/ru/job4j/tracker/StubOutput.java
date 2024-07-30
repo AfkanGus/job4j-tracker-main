@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 public class StubOutput implements Output {
     private final StringBuilder buffer = new StringBuilder();
 

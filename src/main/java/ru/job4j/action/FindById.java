@@ -1,7 +1,9 @@
 package ru.job4j.action;
 
 import ru.job4j.tracker.*;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 public class FindById implements UserAction {
     private final Output out;
 
@@ -15,7 +17,7 @@ public class FindById implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         out.println("=== Вывод заявки по id ===");
         int id = input.askInt("Введите id: ");
         Item item = tracker.findById(id);

@@ -3,7 +3,9 @@ package ru.job4j.action;
 import ru.job4j.tracker.*;
 
 import java.util.List;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 public class FindAll implements UserAction {
     private final Output out;
 
@@ -17,7 +19,7 @@ public class FindAll implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         out.println("=== Вывод всех заявок ===");
         List<Item> items = tracker.findAll();
         if (!items.isEmpty()) {

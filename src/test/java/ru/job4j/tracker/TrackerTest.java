@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 class TrackerTest {
 
     @Test

@@ -1,7 +1,9 @@
 package ru.job4j.tracker;
 
 import java.util.Scanner;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 public class ConsoleInput implements Input {
     private Scanner scanner = new Scanner(System.in);
 

@@ -1,7 +1,9 @@
 package ru.job4j.action;
 
 import ru.job4j.tracker.*;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 public class Create implements UserAction {
     private final Output out;
 
@@ -15,7 +17,7 @@ public class Create implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, MemTracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         out.println("=== Создание новой заявки ===");
         String name = input.askStr("Введите имя: ");
         Item item = new Item(name);

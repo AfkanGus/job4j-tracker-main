@@ -6,7 +6,9 @@ import ru.job4j.action.*;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+/**
+ * 2. Трекер SQL [#1734].
+ */
 class StartUITest {
     @Test
     void whenCreateItem() {
