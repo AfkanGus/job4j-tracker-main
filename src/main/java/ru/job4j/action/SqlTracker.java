@@ -90,6 +90,15 @@ public class SqlTracker implements Store {
         }
     }
 
+    private Item createItemFromResultSet(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        Timestamp timestamp = resultSet.getTimestamp("created");
+        Item item = new Item(id, name, timestamp.toLocalDateTime());
+        item.setId(id);
+        return item;
+    }
+
     @Override
     public List<Item> findAll() {
         List<Item> items = new ArrayList<>();
@@ -98,11 +107,7 @@ public class SqlTracker implements Store {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                items.add(new Item(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getTimestamp("created").toLocalDateTime()
-                ));
+                items.add(createItemFromResultSet(resultSet));
             }
         } catch (SQLException e) {
             throw new IllegalStateException("Error retrieving items from the database", e);
@@ -119,11 +124,7 @@ public class SqlTracker implements Store {
             statement.setString(1, "%" + key + "%");
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    items.add(new Item(
-                            resultSet.getInt("id"),
-                            resultSet.getString("name"),
-                            resultSet.getTimestamp("created").toLocalDateTime()
-                    ));
+                    items.add(createItemFromResultSet(resultSet));
                 }
             }
         } catch (SQLException e) {
@@ -141,11 +142,7 @@ public class SqlTracker implements Store {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    String name = resultSet.getString("name");
-                    String date = resultSet.getString("date");
-
-                    item = new Item(id, name);
-                    item.setId(id);
+                    item = createItemFromResultSet(resultSet);
                 }
             }
         } catch (SQLException e) {
