@@ -42,7 +42,7 @@ public class SqlTracker implements Store {
     @Override
     public Item add(Item item) {
         Timestamp timestampFromLDT = Timestamp.valueOf(item.getCreated());
-        String sql = "INSERT INTO items (name, date) VALUES (?, ?)";
+        String sql = "INSERT INTO items (name, created) VALUES (?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
@@ -66,7 +66,7 @@ public class SqlTracker implements Store {
     @Override
     public boolean replace(int id, Item item) {
         Timestamp timestampFromLDT = Timestamp.valueOf(item.getCreated());
-        String sql = "UPDATE items SET name = ?, date = ? WHERE id = ?";
+        String sql = "UPDATE items SET name = ?, created = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, item.getName());
             statement.setTimestamp(2, timestampFromLDT);

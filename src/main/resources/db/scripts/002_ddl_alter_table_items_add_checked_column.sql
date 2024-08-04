@@ -1,1 +1,1 @@
-alert table items add column checked boolean not null default false;
+ALTER TABLE items ADD COLUMN checked BOOLEAN NOT NULL DEFAULT FALSE;

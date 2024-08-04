@@ -14,9 +14,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
 import static org.assertj.core.api.Assertions.*;
 
-class SqlTrackerTest {
+/**
+ * 3. Liquibase. Интеграционные тесты. [#504894 #507701].
+ */
+public class SqlTrackerTest {
+
     private static Connection connection;
 
     @BeforeAll
@@ -55,4 +60,45 @@ class SqlTrackerTest {
         tracker.add(item);
         assertThat(tracker.findById(item.getId())).isEqualTo(item);
     }
+
+
+    @Test
+    void whenReplaceItemAndFindByGeneratedIdThenMustBeTheSame() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = tracker.add(new Item("itemNew"));
+        Item item1 = new Item("item1");
+        tracker.replace(item.getId(), item1);
+        item1.setId(item.getId());
+        assertThat(tracker.findById(item.getId())).isEqualTo(item1);
+    }
+    @Test
+    public void whenDeleteItemThenCannotFindById() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = tracker.add(new Item("item"));
+        tracker.delete(item.getId());
+        assertThat(tracker.findById(item.getId())).isNull();
+    }
+    @Test
+    public void whenFindAllThenReturnAllItems() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item1 = tracker.add(new Item("item1"));
+        Item item2 = tracker.add(new Item("item2"));
+        List<Item> expected = new ArrayList<>();
+        expected.add(item1);
+        expected.add(item2);
+        assertThat(tracker.findAll()).isEqualTo(expected);
+    }
+    @Test
+    public void whenFindByNameThenReturnMatchingItems() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item1 = tracker.add(new Item("item"));
+        Item item2 = tracker.add(new Item("item"));
+        Item item3 = tracker.add(new Item("otherItem"));
+        List<Item> expected = new ArrayList<>();
+        expected.add(item1);
+        expected.add(item2);
+        assertThat(tracker.findByName("item")).isEqualTo(expected);
+    }
+
+
 }

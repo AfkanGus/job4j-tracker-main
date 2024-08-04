@@ -1,1 +1,1 @@
-alter table items drop column checked;
+Alter table items drop column checked;
